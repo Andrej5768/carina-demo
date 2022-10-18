@@ -25,3 +25,12 @@ mvn clean eclipse:eclipse
 mvn clean test -Dsuite=api
 ```
 
+
+```
+mvn -U clean idea:idea
+```
+
+```
+mvn clean compile
+```
+
