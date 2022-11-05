@@ -35,9 +35,6 @@ import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 public class HomePage extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @FindBy(xpath = "//div[@class='footer-inner']/div[@id='footmenu']")
-    private ExtendedWebElement smallFooterMenuOnHomePage;
-
     @FindBy(id = "footmenu")
     private FooterMenu footerMenu;
 
@@ -84,18 +81,9 @@ public class HomePage extends AbstractPage {
         return new WeValuePrivacyAd(driver);
     }
 
-    public void scrollToSmallFooterMenuOnHomePage() {
-        smallFooterMenuOnHomePage.scrollTo();
-        pause(0.2);
-    }
-
     public void scrollAndClickSwitchToDesktopVersionButton() {
         desktopVersionButton.scrollTo();
         desktopVersionButton.click();
         pause(1);
-    }
-
-    public boolean isVisible() {
-        return smallFooterMenuOnHomePage.isElementPresent();
     }
 }
