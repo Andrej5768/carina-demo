@@ -25,7 +25,6 @@ mvn clean eclipse:eclipse
 mvn clean test -Dsuite=api
 ```
 
-
 ```
 mvn -U clean idea:idea
 ```
@@ -33,4 +32,19 @@ mvn -U clean idea:idea
 ```
 mvn clean compile
 ```
+### Run testSuite
+```
+mvn clean test -Dsuite=myTests
+```
+Run Single test class
+```
+mvn test -Dtest=LoginTest
+```
+Run single test method in test class
+```
+mvn test -Dtest=LoginTest#testLoginToAccount
+```
 
+```
+mvn clean test -Dsuite=mySuite/myTests
+```
