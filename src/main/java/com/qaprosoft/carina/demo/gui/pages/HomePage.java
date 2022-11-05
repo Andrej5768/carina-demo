@@ -20,28 +20,38 @@ import java.util.List;
 
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.WeValuePrivacyAd;
+import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 
 
 public class HomePage extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    @FindBy(xpath = "//div[@class='footer-inner']/div[@id='footmenu']")
+    private ExtendedWebElement smallFooterMenuOnHomePage;
+
     @FindBy(id = "footmenu")
     private FooterMenu footerMenu;
+
+    @FindBy(id = "header")
+    private HeaderMenu headerMenu;
 
     @FindBy(xpath = "//div[contains(@class, 'brandmenu-v2')]//a")
     private List<ExtendedWebElement> brandLinks;
 
     @FindBy(className = "news-column-index")
     private ExtendedWebElement newsColumn;
+
+    @FindBy(xpath = "//p[@class='switch-desktop']/a[@id='switch-version']")
+    private ExtendedWebElement desktopVersionButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -51,6 +61,10 @@ public class HomePage extends AbstractPage {
 
     public FooterMenu getFooterMenu() {
         return footerMenu;
+    }
+
+    public HeaderMenu getHeaderMenu() {
+        return headerMenu;
     }
 
     public BrandModelsPage selectBrand(String brand) {
@@ -65,8 +79,23 @@ public class HomePage extends AbstractPage {
         }
         throw new RuntimeException("Unable to open brand: " + brand);
     }
-    
+
     public WeValuePrivacyAd getWeValuePrivacyAd() {
-    	return new WeValuePrivacyAd(driver);
+        return new WeValuePrivacyAd(driver);
+    }
+
+    public void scrollToSmallFooterMenuOnHomePage() {
+        smallFooterMenuOnHomePage.scrollTo();
+        pause(0.2);
+    }
+
+    public void scrollAndClickSwitchToDesktopVersionButton() {
+        desktopVersionButton.scrollTo();
+        desktopVersionButton.click();
+        pause(1);
+    }
+
+    public boolean isVisible() {
+        return smallFooterMenuOnHomePage.isElementPresent();
     }
 }
